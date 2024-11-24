@@ -16,7 +16,7 @@ public class DZTest {
         browser.findElement(By.xpath("//input[@placeholder='Password']")).sendKeys("secret_sauce");
         browser.findElement(By.xpath("//input[@data-test='login-button']")).click();
         assert browser.findElement(By.xpath("//span[@class='title']")).isDisplayed();
-        browser.close() ;
+        browser.close();
 
     }
 
