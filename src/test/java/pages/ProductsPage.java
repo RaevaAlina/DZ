@@ -1,5 +1,4 @@
 package pages;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -9,8 +8,7 @@ public class ProductsPage extends BasePage {
     }
 
     private final By TITLE = By.cssSelector("[class=title]");
-    private final By TITLE2 = By.xpath("//*[text()='Products']");
-    private final By errorMsg = By.xpath("//h3");
+    private final By TITLE2 = By.xpath("//span[@class='title']");
     private final String ADD_TO_CART_PATTERN =
             "//div[text()='%s']//ancestor::div[@class='inventory_item']//button";
     private final String ADD_REMOVE_PATTERN =
@@ -23,10 +21,6 @@ public class ProductsPage extends BasePage {
     public boolean titleDisplayed() {
         return driver.findElement(TITLE2).isDisplayed();
 
-    }
-
-    public String getErrorMsg() {
-        return driver.findElement(errorMsg).getText();//
     }
 
     public void addToCart(String product) {

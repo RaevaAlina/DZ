@@ -30,8 +30,8 @@ public class BaseTest {
         productsPage = new ProductsPage(driver);
     }
 
-    @AfterMethod
-   public void close() {
+    /*@AfterMethod
+    public void close() {
         driver.quit();
-    }
+    }*/
 }
