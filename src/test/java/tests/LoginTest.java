@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class LoginTest extends BaseTest {
-    @Epic("Модуль логина интеренет-магазина")
+    @Epic("Модуль логина интернет-магазина")
     @Feature("ND")
     @Story("ND.2")
     @Severity(SeverityLevel.BLOCKER)

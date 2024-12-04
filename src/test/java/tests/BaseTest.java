@@ -1,6 +1,5 @@
 package tests;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Description;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,11 +10,11 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pages.LoginPage;
 import pages.ProductsPage;
-import tests.TestListener;
 import utils.PropertyReader;
+
 import java.util.concurrent.TimeUnit;
 
-@Listeners(TestListener.class)
+@Listeners(tests.TestListener.class)
 public class BaseTest {
     WebDriver driver;
     LoginPage loginPage;
@@ -26,14 +25,13 @@ public class BaseTest {
     @Parameters({"browser"})
     @BeforeMethod
     @Description("Открытие")
-    public void setup(@Optional("Chrome") String browser, ITestContext context) {
-        if (browser.equalsIgnoreCase("Chrome")) {
-            WebDriverManager.chromedriver().setup();
+    public void setup(@Optional("chrome") String browser, ITestContext context) {
+        if (browser.equalsIgnoreCase("chrome")) {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("start-maximized");
+            //options.addArguments("headless");
             driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("edge")) {
-            WebDriverManager.edgedriver().setup();
             driver = new EdgeDriver();
         }
         driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
@@ -42,13 +40,18 @@ public class BaseTest {
         productsPage = new ProductsPage(driver);
 
         System.setProperty("BASE_URL", PropertyReader.getProperty("sauce.url"));
-        user=PropertyReader.getProperty("sauce.user");
-        password =PropertyReader.getProperty("sauce.password");
+        user = PropertyReader.getProperty("sauce.user");
+        password = PropertyReader.getProperty("sauce.password");
     }
 
-   @AfterMethod
+    @AfterMethod
     @Description("Закрытие")
     public void close(ITestResult result) {
+      /*  if (ITestResult.FAILURE == result.getStatus()) {
+            AllureUtils.takeScreenshot(driver);
+        }*/
         driver.quit();
     }
 }
+
+
