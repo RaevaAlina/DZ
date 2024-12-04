@@ -1,4 +1,5 @@
 package pages;
+
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,6 +8,7 @@ public class ProductsPage extends BasePage {
     public ProductsPage(WebDriver driver) {
         super(driver);
     }
+
     private final By TITLE = By.cssSelector("[class=title]");
     private final By TITLE2 = By.xpath("//span[@class='title']");
     private final String ADD_TO_CART_PATTERN =
@@ -29,12 +31,6 @@ public class ProductsPage extends BasePage {
         By addToCart = By.xpath(String.format(ADD_TO_CART_PATTERN, product));
         driver.findElement(addToCart).click();
     }
-    /*
-    public void Remove(String product) {
-
-        By addRemove = By.xpath(String.format(ADD_REMOVE_PATTERN, product));
-        driver.findElement(addRemove).click();
-    }*/
 }
 
 

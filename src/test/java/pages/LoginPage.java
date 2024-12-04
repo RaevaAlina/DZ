@@ -1,5 +1,4 @@
 package pages;
-//import io.qameta.allure.Step;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
@@ -17,7 +16,7 @@ public class LoginPage extends BasePage {
 
     @Step("Открытие браузера")
     public void open() {
-        driver.get(Base_URL);
+        driver.get(BASE_URL);
     }
 
     @Step("Ввводим данные {user} и {password}")
@@ -34,7 +33,8 @@ public class LoginPage extends BasePage {
     public void fillPasswordInput(String password) {
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
     }
-@Step("Находим кнопку и отправляем данные")
+
+    @Step("Находим кнопку и отправляем данные")
     public void clickSubmitBtn() {
         driver.findElement(LOGIN_BUTTON).submit();
     }
