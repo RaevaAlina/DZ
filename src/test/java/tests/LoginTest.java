@@ -3,6 +3,7 @@ package tests;
 import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 import static org.testng.Assert.*;
 
 public class LoginTest extends BaseTest {
@@ -17,27 +18,25 @@ public class LoginTest extends BaseTest {
     @Flaky
     @Test(description = "Авторизация под верными данными")
     public void correctLogin() {
-        loginPage.open();
-        loginPage.login(user,password);
+        loginPage
+                .open()
+                .login(user, password);
         assertTrue(productsPage.titleDisplayed());
     }
 
-    @DataProvider()
+    @DataProvider
     public Object[][] loginData() {
         return new Object[][]{
                 {"locked_out_user", password, "Epic sadface: Sorry, this user has been locked out."},
                 {user, "12345", "Epic sadface: Username and password do not match any user in this service"},
-                {"", password, "Epic sadface: Username is required"}
+                {"", password, "Epic sadface: Username is required"},
         };
     }
 
-    @Test(dataProvider = "loginData")
-    public void errorLogin(String user, String password, String errorMSG) {
+    @Test(dataProvider = "loginData", description = "Авторизация невалидного пользователя")
+    public void errorLogin(String user, String password, String errorMessage) {
         loginPage.open();
         loginPage.login(user, password);
-        loginPage.getErrorMessage();
-        assertEquals(loginPage.getErrorMessage(), errorMSG);
+        assertEquals(loginPage.getErrorMessage(), errorMessage);
     }
 }
-
-

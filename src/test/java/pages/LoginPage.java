@@ -5,18 +5,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage {
-    private final By USERNAME_INPUT = By.id("user-name");
-    private final By PASSWORD_INPUT = By.id("password");
-    private final By LOGIN_BUTTON = By.id("login-button");
-    private final By ERROR_MESSAGE = By.cssSelector("h3");
+    private static final By USERNAME_INPUT = By.id("user-name");
+    private static final By PASSWORD_INPUT = By.id("password");
+    private static final By LOGIN_BUTTON = By.id("login-button");
+    private final By errorMessage = By.cssSelector("h3");
 
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
     @Step("Открытие браузера")
-    public void open() {
+    public LoginPage open() {
         driver.get(BASE_URL);
+        return this;
     }
 
     @Step("Ввводим данные {user} и {password}")
@@ -41,6 +42,6 @@ public class LoginPage extends BasePage {
 
     @Step("Получение текста из сообщения об ошибке")
     public String getErrorMessage() {
-        return driver.findElement(ERROR_MESSAGE).getText();
+        return driver.findElement(errorMessage).getText();
     }
 }

@@ -9,21 +9,13 @@ public class ProductsPage extends BasePage {
         super(driver);
     }
 
-    private final By TITLE = By.cssSelector("[class=title]");
-    private final By TITLE2 = By.xpath("//span[@class='title']");
-    private final String ADD_TO_CART_PATTERN =
+    private static final String ADD_TO_CART_PATTERN =
             "//div[text()='%s']//ancestor::div[@class='inventory_item']//button";
-    private final String ADD_REMOVE_PATTERN =
-            "//div[text()='%s']//ancestor::div[@class='inventory_item']//button";
-
-    @Step("Получение заголовка страницы")
-    public String getTitle() {
-        return driver.findElement(TITLE).getText();
-    }
+    private final By title = By.xpath("//span[@class='title']");
 
     @Step("Проверка отображения заголовка")
     public boolean titleDisplayed() {
-        return driver.findElement(TITLE2).isDisplayed();
+        return driver.findElement(title).isDisplayed();
     }
 
     @Step("Нажимаем кнопку Добавить в корзину")
@@ -32,6 +24,3 @@ public class ProductsPage extends BasePage {
         driver.findElement(addToCart).click();
     }
 }
-
-
-
