@@ -35,8 +35,9 @@ public class LoginTest extends BaseTest {
 
     @Test(dataProvider = "loginData", description = "Авторизация невалидного пользователя")
     public void errorLogin(String user, String password, String errorMessage) {
-        loginPage.open();
-        loginPage.login(user, password);
+        loginPage
+                .open()
+                .login(user, password);
         assertEquals(loginPage.getErrorMessage(), errorMessage);
     }
 }
